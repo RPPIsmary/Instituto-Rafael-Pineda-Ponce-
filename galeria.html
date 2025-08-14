@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Carrusel 3D Visible y Grande al Clic</title>
+<style>
+  body {
+    margin: 0;
+    background: radial-gradient(circle, #0f0c29, #302b63, #24243e);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    perspective: 1600px;
+    overflow: hidden;
+    color: white;
+  }
+
+  h1 {
+    margin: 30px 0 10px;
+    font-size: 2.5rem;
+    text-shadow: 0 0 12px #00f0ff;
+    color: #00f0ff;
+    letter-spacing: 2px;
+  }
+
+  .carrusel {
+    width: 100%;
+    height: 500px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: girar 40s linear infinite;
+    cursor: pointer;
+  }
+
+  .carrusel.paused {
+    animation-play-state: paused;
+  }
+
+.item {
+  position: absolute;
+  width: 180px;
+  height: 240px;
+  border-radius: 15px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  transition: box-shadow 0.3s ease, filter 0.3s ease;
+  border: 3px solid #00f0ff;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+  transform: translate(-50%, -50%) rotateY(var(--angle)) translateZ(380px);
+}
+
+.item:hover {
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.8), 0 0 60px rgba(0, 255, 255, 0.5);
+  filter: brightness(1.2);
+  z-index: 10;
+}
+
+
+  @keyframes girar {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+  }
+
+  /* Modal */
+  #modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    justify-content: center;
+    align-items: center;
+  }
+
+  #modal.active {
+    display: flex;
+  }
+
+  #modal img {
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 16px;
+    border: 3px solid #00ffff;
+    box-shadow: 0 0 40px #00ffff;
+  }
+
+  #modal .cerrar {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    text-shadow: 0 0 10px red;
+  }
+
+  /* Botón */
+  #btnPrincipal {
+    margin: 40px 0;
+    background: linear-gradient(to right, #5da2e2, #4046c1);
+    color: white;
+    font-weight: 700;
+    border: none;
+    border-radius: 30px;
+    padding: 15px 50px;
+    font-size: 18px;
+    box-shadow: 0 0 20px rgba(255, 75, 43, 0.6);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  #btnPrincipal:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(92, 158, 199, 0.9);
+  }
+</style>
+</head>
+<body>
+
+<h1>✨ GALERIA ✨</h1>
+
+<div class="carrusel" id="carrusel"></div>
+
+<button id="btnPrincipal" onclick="location.href='index.html'">⬅️ Volver a la Página Principal</button>
+
+<!-- Modal -->
+<div id="modal">
+  <span class="cerrar" id="cerrar">&times;</span>
+  <img id="modalImg" src="" alt="Imagen ampliada" />
+</div>
+
+<script>
+  const imagenes = [
+    'f1.jpg', 'f2.jpg', 'f3.jpg', 'f4.jpg',
+    'f5.jpg', 'f6.jpg', 'f9.jpg', 'f10.jpg',
+    'f11.jpg', 'f12.jpg', 'f13.jpg', 'f14.jpg'
+  ];
+
+  const carrusel = document.getElementById('carrusel');
+  const radio = 380; // MÁS SEPARADO
+  const numItems = imagenes.length;
+  const anguloSeparacion = 360 / numItems;
+
+  imagenes.forEach((src, i) => {
+    const item = document.createElement('div');
+    item.className = 'item';
+    item.style.backgroundImage = `url(${src})`;
+    const angulo = i * anguloSeparacion;
+    item.style.transform = `translate(-50%, -50%) rotateY(${angulo}deg) translateZ(${radio}px)`;
+
+
+    carrusel.appendChild(item);
+
+    item.addEventListener('click', e => {
+      e.stopPropagation();
+      abrirModal(src);
+    });
+  });
+
+  // Pausar al fondo
+  carrusel.addEventListener('click', () => {
+    carrusel.classList.toggle('paused');
+  });
+
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modalImg');
+  const cerrar = document.getElementById('cerrar');
+
+  function abrirModal(src) {
+    modalImg.src = src;
+    modal.classList.add('active');
+  }
+
+  function cerrarModal() {
+    modal.classList.remove('active');
+    modalImg.src = '';
+  }
+
+  cerrar.addEventListener('click', cerrarModal);
+  modal.addEventListener('click', e => {
+    if (e.target === modal) cerrarModal();
+  });
+
+  window.addEventListener('keydown', e => {
+    if (e.key === 'Escape') cerrarModal();
+  });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

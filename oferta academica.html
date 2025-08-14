@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OFERTA ACADÉMICA</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: start;
+      padding: 40px;
+    }
+
+    .container {
+      width: 90%;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 30px;
+      padding: 50px;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+      animation: popIn 1s ease;
+    }
+
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    h1.title {
+      text-align: center;
+      font-size: 48px;
+      margin-bottom: 40px;
+      color: #00eaff;
+      text-shadow: 0 0 10px #00eaff;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: 26px;
+      margin: 40px 0 20px;
+      color: #fff;
+      background: linear-gradient(to right, #ff416c, #ff4b2b);
+      padding: 14px 30px;
+      border-radius: 50px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(255, 75, 43, 0.6);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      color: #00ffe0;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(#00ffe0, transparent, #00ffe0);
+      animation: rotate 5s linear infinite;
+      opacity: 0.2;
+    }
+
+    .card:hover {
+      transform: scale(1.07);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .btn-container {
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .boton {
+      background: linear-gradient(to right, #ff416c, #ff4b2b);
+      color: white;
+      border: none;
+      padding: 16px 35px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(255, 75, 43, 0.6);
+      transition: all 0.3s ease;
+    }
+
+    .boton:hover {
+      background: linear-gradient(to left, #ff416c, #ff4b2b);
+      transform: scale(1.1);
+      box-shadow: 0 0 25px rgba(255, 75, 43, 0.8);
+    }
+
+    a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Oferta Académica</h1>
+
+    <div class="section-title">🌟 Módulos de Nivel Básico</div>
+    <div class="grid">
+    
+      <div class="card">🔩 Construcciones Metálicas</div>
+      <div class="card">🪵 Madera</div>
+      <div class="card">✂️ Corte y Confección</div>
+    </div>
+
+    <div class="section-title">🎓 Bachilleres Técnicos</div>
+    <div class="grid">
+      <div class="card">🏗️ Construcciones Metálicas</div>
+      <div class="card">💻 Informática</div>
+      <div class="card">🏨 Administración Hotelera</div>
+      <div class="card">⚡ Electricidad</div>
+    </div>
+
+    <div class="btn-container">
+      <a href="index.html">
+        <button class="boton">⬅️ Volver a la Página Principal</button>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
+
+
